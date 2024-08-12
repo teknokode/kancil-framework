@@ -1,5 +1,5 @@
 <p align=center> 
-<img src="https://github.com/user-attachments/assets/79653573-89e9-433a-bf72-f0f0fa63c0ab" alt="Framework Kancil">
+<img src="https://github.com/user-attachments/assets/f1630322-e227-479e-a89c-eb3013e54467" alt="Framework Kancil">
 </p>
 
 #### Framework PHP Sederhana dan Ringan
