@@ -1,9 +1,8 @@
 <?php
-namespace App\Core;
+namespace Kancil\Core;
 
 class Api
 {
-
     public function requestMethod()
     {
         return strtolower($_SERVER['REQUEST_METHOD']);
