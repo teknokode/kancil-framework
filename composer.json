@@ -8,6 +8,7 @@
   "autoload": {
       "psr-4": {
           "Kancil\\": "system/"
-      }
+      },
+      "files": ["system/Functions/helpers.php"]
   }
 }
