@@ -22,8 +22,6 @@ class Router
     {
         $pattern = rtrim($pattern,"/");
         $pattern = (empty($pattern)) ? "/" : $pattern;
-        // $this->routes[$method][$pattern] = $class;
-        // Mestinya seperti ini: 
         $this->routes[$method][$pattern] = ["class" => $class, "filter" => $filter];
     }
 
@@ -54,21 +52,15 @@ class Router
     // Menjalankan router
     public function match()
     {
-        // print "Routes:\n";
-        // print_r($this->routes);
-
         $method = strtolower($_SERVER['REQUEST_METHOD']);
         $url = $_SERVER['REQUEST_URI'];
         //$url = str_replace( basename(dirname(__FILE__))."/","", $url );
-
         //$url = "/".str_replace( $base,"", $url ); <== Ok
 
         // Definisi URL di .env tanpa pake backslash di belakang
         $base = rtrim(BASE_URL,"/");
         $url = str_replace( $base,"", $url ); // <== Ok
 
-        //print $url;
-    
         // print "URL:\n";
         // print_r($url);
 
@@ -85,15 +77,11 @@ class Router
         {
             foreach ($this->routes[$method] as $routeUrl => $target) 
             {
-                //pd($target);
-
                 $pattern = preg_replace('/\/:([^\/]+)/', '/(?<$1>[^/]+)', $routeUrl); //<=== FIX GOOD
 
                 // print "\nPattern:\n";
                 // print $pattern;
-
                 // preg_match('#^' . $pattern . '$#', $url, $matches);
-
                 // print "\nMatches:\n";
                 // print_r($matches);
             

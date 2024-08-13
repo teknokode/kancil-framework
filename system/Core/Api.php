@@ -12,7 +12,7 @@ class Api
     {
         $response = ["code" => $code, "status" => $status, "message" => $message, "data" => $data];
         http_response_code($code);
-        header("Server: Commanche");
+        header("Server: Kancil");
         header("Content-Type: application/json; charset=utf-8");
         echo json_encode($response);
         die();
