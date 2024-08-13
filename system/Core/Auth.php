@@ -6,7 +6,8 @@ use Firebase\JWT\Key;
 
 class Auth 
 {
-    public $key = "@andk12132Lkdoas000232232";
+    //public $key = "@andk12132Lkdoas000232232";
+    public $key = SECRET_KEY;
 
     public function createJwtToken( $payload )
     {
