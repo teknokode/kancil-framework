@@ -45,7 +45,7 @@ class Router
         {
             list($class,$method) = explode("::", $target);
             $object = new $class();
-            call_user_func_array(array($object, $method), $result["params"]);
+            echo call_user_func_array(array($object, $method), $result["params"]);
         }
     }
 
