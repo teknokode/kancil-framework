@@ -123,9 +123,8 @@ if (!function_exists('pd')) {
 
         print "</div>";
 
-
         print "</div>";
-        print "<p style='margin-top:2rem'><img src='".BASE_URL."/assets/img/pino-logo.png'></p>";
+        print "<p style='margin-top:2rem'><img src='".BASE_URL."/assets/img/kancil.png'></p>";
         print "</div>";
         die();
        
