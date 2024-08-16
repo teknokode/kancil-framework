@@ -29,7 +29,7 @@ class Auth
     {
         $result = $db->find( USERS_TABLE , 
                              USERNAME_FIELD."='$username' AND ".PASSWORD_FIELD."= '$password'" );
-        if ($result[0])
+        if ($result)
         {
             $_SESSION["users"]= json_encode($result[0]);
             $_SESSION["logged_in"]= true;
