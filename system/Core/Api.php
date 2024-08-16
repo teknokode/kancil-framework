@@ -20,7 +20,7 @@ class Api
 
     public function responseError($message = "Terjadi kesalahan", $code = 400, $data = [])
     {
-        $this->apiResponse($data, "Error", $message, $code);
+        $this->responseJSON($data, "Error", $message, $code);
     }
 
     public function requestAuth()
