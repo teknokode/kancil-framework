@@ -1,5 +1,21 @@
 {
   "name": "teknokode/kancil-framework",
+  "type": "framework",
+  "description": "Framework MVC PHP",
+  "license": "MIT",
+  "keywords": [
+        "framework",
+        "kancil",
+        "php"
+  ],
+  "minimum-stability": "dev",
+  "authors": [
+      {
+          "name": "Pino Ruswana",
+          "role": "Developer",
+          "email": "apenta.hosting@gmail.com"
+      }
+  ],
   "require": {
       "firebase/php-jwt": "^6.10",
       "salesforce/handlebars-php": "^3.0",
