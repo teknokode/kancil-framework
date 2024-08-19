@@ -9,6 +9,12 @@ class Error
     {
         $parser = new Parser;
 
-        echo $parser->render("page404.html");
+        if (isBrowser()) 
+        {
+            return $parser->render("page404.html");
+        } else 
+        {
+            return responseError($message = "Alamat tidak ditemukan", $code = 404, $data = [])
+        }
     }
 }

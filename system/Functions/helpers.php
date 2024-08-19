@@ -1,5 +1,66 @@
 <?php
 
+if (!function_exists('isBrowser')) {
+    function isBrowser()
+    {
+        $browserList[] = 'chrome';
+        $browserList[] = 'chromium';
+        $browserList[] = 'firefox';
+        $browserList[] = 'edge';
+        $browserList[] = 'opera';
+        $browserList[] = 'safari';
+        $browserList[] = 'samsungbrowser';
+        $browserList[] = 'redmi';
+        $browserList[] = 'iphone';
+        $browserList[] = 'uc browser';
+        $browserList[] = 'vivaldi';
+        $browserList[] = 'brave';
+        $browserList[] = 'maxthon';
+        $browserList[] = 'palemoon';
+        $browserList[] = 'blisk';
+        $browserList[] = 'thorium';
+        $browserList[] = 'yandex';
+        $browserList[] = 'puffin';
+        $browserList[] = 'qqbrowser';
+        $browserList[] = 'coc coc';
+        $browserList[] = 'whale';
+        $browserList[] = '2345 explorer';
+        $browserList[] = 'icecat';
+        $browserList[] = 'lunascape';
+        $browserList[] = 'seznam browser';
+        $browserList[] = 'sleipnir';
+        $browserList[] = 'sputnik';
+        $browserList[] = 'oculus';
+        $browserList[] = 'salamweb';
+        $browserList[] = 'swing';
+        $browserList[] = 'safe exam';
+        $browserList[] = 'colibri';
+        $browserList[] = 'xvast';
+        $browserList[] = 'atom';
+        $browserList[] = 'netcast';
+        $browserList[] = 'lg browser';
+
+        $nonBrowser = true;
+        foreach($browserList as $key)
+        {
+            if ( isset($_SERVER['HTTP_USER_AGENT']) && (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), $key) !== false) )
+            {
+                $nonBrowser = false;
+                break;
+            } 
+        }
+
+        $isAjax = ( isset($_SERVER['X_REQUESTED_WITH']) && strtolower($_SERVER['X_REQUESTED_WITH']) == 'xmlhttprequest');
+        $isAcceptJSON = ( isset($_SERVER['HTTP_ACCEPT']) && (strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false) );
+        
+        if ($isAjax || $isAcceptJSON || $nonBrowser)
+        {
+            return false;
+        }
+        return true;
+    }
+}
+
 if (!function_exists('encrypt')) {
     function encrypt($string) 
     {
