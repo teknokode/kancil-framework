@@ -2,6 +2,7 @@
 namespace Kancil\Core;
 
 use Kancil\Core\Parser;
+use Kancil\Core\Api;
 
 class Error 
 {
@@ -14,7 +15,8 @@ class Error
             return $parser->render("page404.html");
         } else 
         {
-            return responseError($message = "Alamat tidak ditemukan", $code = 404, $data = []);
+            $api = new Api;
+            return $api->responseError($message = "Alamat tidak ditemukan", $code = 404, $data = []);
         }
     }
 }
