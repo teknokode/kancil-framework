@@ -180,7 +180,6 @@ if (!function_exists('pd'))
         } else {
             print $var;
         }
-
         print "<br><br>";
         print "File: ".__FILE__."\n";
         print "Line: ".__LINE__."\n";
