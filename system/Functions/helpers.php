@@ -41,7 +41,7 @@ if (!function_exists('isBrowser'))
         $browserList[] = 'netcast';
         $browserList[] = 'lg browser';
 
-        print_r($_SERVER);
+        //print_r($_SERVER);
 
         $nonBrowser = true;
         foreach($browserList as $key)
