@@ -2,16 +2,25 @@
 
 namespace Kancil\Interfaces;
 
-interface Database {
+interface Database 
+{
+    // Wajib
     public function connect();
-    public function select( $table );
-    public function find( $table, $keys );
 
+    // Jalankan query umum / mentah
     public function query( $sql );
-    // public function all( $table );
-    // public function single( $table, $where );
+
+    // Baca seluruh isi tabel    
+    public function select( $table );
+
+    // Cari record pada sebuah tabel
+    public function find( $table, $where );
+
     // public function update( $table, $data, $where );
     // public function insert( $table, $data );
     // public function delete( $table, $where );
-    // public function insertID();
+    // public function lastID();
+    // public function rowCount();
+
+
 }
