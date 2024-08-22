@@ -167,7 +167,7 @@ if (!function_exists('pd')) {
         print "</div>";
 
         print "<div style=\"width:100%; background-color: #FFE6E6; padding: 0.5rem 1rem; margin: 0\">";
-        print "<pre><xmp>";
+        //print "<pre><xmp>";
         if (is_array($var))
         {
             print_r($var);
@@ -178,9 +178,7 @@ if (!function_exists('pd')) {
         print "\n\n";
         // print "File: ".__FILE__."\n";
         // print "Line: ".__LINE__."\n";
-
-
-        print "</xmp></pre>";
+        //print "</xmp></pre>";
 
         print "</div>";
 
