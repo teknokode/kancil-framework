@@ -2,7 +2,8 @@
 
 namespace Kancil\Core;
 
-class BaseController
+//class BaseController
+class Controller
 {
     public function __construct() 
     {

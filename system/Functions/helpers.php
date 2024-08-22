@@ -1,6 +1,7 @@
 <?php
 
-if (!function_exists('isBrowser')) {
+if (!function_exists('isBrowser')) 
+{
     function isBrowser()
     {
         $browserList[] = 'chrome';
@@ -61,7 +62,8 @@ if (!function_exists('isBrowser')) {
     }
 }
 
-if (!function_exists('encrypt')) {
+if (!function_exists('encrypt')) 
+{
     function encrypt($string) 
     {
         $output = false;
@@ -74,7 +76,8 @@ if (!function_exists('encrypt')) {
     }
 }
 
-if (!function_exists('decrypt')) {
+if (!function_exists('decrypt')) 
+{
     function decrypt($string) 
     {
         $output = false;
@@ -86,7 +89,8 @@ if (!function_exists('decrypt')) {
     }
 }
 
-if (!function_exists('escape')) {
+if (!function_exists('escape')) 
+{
     function escape($value)
     {
         $return = '';
@@ -102,7 +106,8 @@ if (!function_exists('escape')) {
     }
 }
 
-if (!function_exists('inputFilter')) {
+if (!function_exists('inputFilter')) 
+{
     function inputFilter( $data )
     { 
         if (is_array($data)) {
@@ -118,7 +123,8 @@ if (!function_exists('inputFilter')) {
     }
 }
 
-if (!function_exists('redirect')) {
+if (!function_exists('redirect')) 
+{
     function redirect( $relative , $cookie = []) 
     {
        if ($cookie)
@@ -135,8 +141,8 @@ if (!function_exists('redirect')) {
     }
 }
 
-if (!function_exists('pd')) {
-
+if (!function_exists('pd')) 
+{
     function pd( $var )
     {
         print "<style>
@@ -160,9 +166,7 @@ if (!function_exists('pd')) {
         }</style>";
 
         print "<div class='container'>";
-        
         print "<div style=\"width:80%; background-color:#efefef; border: 1px solid #F7B5CA; padding: 0; border-radius: 0.25rem\">";
-
         print "<div style=\"width:100%; background-color:EECAD5; padding: 0.75rem 1rem; margin: 0\"><b>Kesalahan</b>";
         print "</div>";
 
@@ -175,18 +179,14 @@ if (!function_exists('pd')) {
             print $var;
         }
 
-        print "\n\n";
-        // print "File: ".__FILE__."\n";
-        // print "Line: ".__LINE__."\n";
+        print "<br><br>";
+        print "File: ".__FILE__."\n";
+        print "Line: ".__LINE__."\n";
         //print "</xmp></pre>";
-
         print "</div>";
-
         print "</div>";
         print "<p style='margin-top:2rem'><img src='".BASE_URL."/assets/img/kancil.png' height=50></p>";
         print "</div>";
         die();
-       
     }
-
 }
