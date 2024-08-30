@@ -15,4 +15,7 @@ class Model
         $this->db = new Database;
     }
 
+    function getAll()
+    function getByID()
+
 }
