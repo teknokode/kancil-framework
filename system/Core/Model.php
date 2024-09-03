@@ -15,11 +15,11 @@ class Model
         $this->db->connect();
     }
 
-    function get() {
+    public function get() {
         return $this->db->get($this->tableName);
     }
 
-    function find( $where ) {
+    public function find( $where ) {
         return $this->db->find($this->tableName, $where); 
     }
 }
