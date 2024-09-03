@@ -25,15 +25,7 @@ class Database extends DatabaseDriver
         $this->connect();
     }
 
-    // Fungsi-fungsi ini berasal dari DatabaseDriver
-    // Tidak perlu didefinisikan di sini, karena inherit
-     
-    // public function connect();
-    // public function select();
-    // public function update();
-    // public function insert();
-    // public function delete();
-    // public function insertID();
+    // Fungsi-fungsi query berasal dari DatabaseDriver - inherit
 
     function skema()
     {
