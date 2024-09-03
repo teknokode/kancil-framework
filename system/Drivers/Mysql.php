@@ -45,10 +45,15 @@ class Mysql implements Database {
         return $stmt->fetchAll();
     }
 
-    public function select( $table ) 
+    public function get( $table ) 
     {
         return $this->query("SELECT * FROM $table");
     }
+
+    // public function select( $table ) 
+    // {
+    //     return $this->query("SELECT * FROM $table");
+    // }
     
     public function find( $table, $where ) 
     {

@@ -11,7 +11,7 @@ interface Database
     public function query( $sql );
 
     // Baca seluruh isi tabel    
-    public function select( $table );
+    public function get( $table );
 
     // Cari record pada sebuah tabel
     public function find( $table, $where );
