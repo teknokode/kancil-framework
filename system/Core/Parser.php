@@ -4,10 +4,13 @@ namespace Kancil\Core;
 use Handlebars\Handlebars;
 use Handlebars\Loader\FilesystemLoader;
 
+// Seharusnya ini sudah autoload pada class controller
+
 class Parser 
 {
     protected $handlebars;
 
+    // Pengaturan awal Handlebars
     public function __construct( )
     {
         $partialsDir = APP_PATH."/app/Views";
@@ -24,6 +27,7 @@ class Parser
         ]);
     }
 
+    // Render sebuah halaman dengan parameter data
     public function render( $file, $param = [])
     {
         $data["base_url"] = BASE_URL;
@@ -31,12 +35,13 @@ class Parser
 
         $cache_file = APP_PATH."/storage/Caches/".substr(base64_encode($file.json_encode($param)),0,100).".html";
 
-        if ($this->isCacheExpired($cache_file, 0)) {
-
+        if ($this->isCacheExpired($cache_file, 0)) 
+        {
             $content = $this->handlebars->render($file, $data);
             return $this->savePrintCache($cache_file, $content);
 
         } else {
+
             return file_get_contents($cache_file);
         }
     }
@@ -44,12 +49,14 @@ class Parser
     // Periksa jam modifikasi file cache
     private function isCacheExpired($cache_file, $minutes = 0)
     {
-        // Minutes = 0, cache dimatikan
+        // Kalau minutes = 0, cache dimatikan
         if ($minutes==0) return true;
-        if (file_exists($cache_file)) {
+        if (file_exists($cache_file)) 
+        {
             $modified_time = filemtime($cache_file);
             $time_diff = time() - $modified_time;
-            if ($time_diff < ($minutes * 60)) {
+            if ($time_diff < ($minutes * 60)) 
+            {
                 return false;
             }
             unlink($cache_file);
@@ -60,7 +67,7 @@ class Parser
     // Simpan dan tampilkan cache
     private function savePrintCache( $cache_file, $content )
     {
-        $content .= "<!-- st.mun.57 | 28.11.72 | " . date("Y.m.d H:i:s") . " -->";
+        $content .= "<!-- mac.gyver.57 | 28.11.72 | " . date("Y.m.d H:i:s") . " -->";
         file_put_contents( $cache_file, $content);
         return $content;
     }

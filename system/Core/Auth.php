@@ -8,16 +8,19 @@ class Auth
 {
     public $key = SECRET_KEY;
 
+    // Membuat token JWT
     public function createJwtToken( $payload )
     {
         return JWT::encode($payload, $this->key, 'HS256');
     }
 
+    // Verifikasi token JWT
     public function verifyJwtToken( $token )
     {
         return JWT::decode($token, new Key($this->key, 'HS256'));
     }
 
+    // Mendapatkan header JWT
     public function getJwtHeaders( $token )
     {
         $headers = new stdClass();
@@ -25,6 +28,7 @@ class Auth
         return $headers;
     }
 
+    // User login, bisa untuk web atau API
     public function userLogin( $db, $username, $password )
     {
         $result = $db->find( USERS_TABLE , 
@@ -38,6 +42,7 @@ class Auth
         return false;
     }
 
+    // Untuk mengubah secret key
     public function setKey( $key )
     {
         $this->key = $key;

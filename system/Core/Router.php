@@ -61,9 +61,6 @@ class Router
         $base = rtrim(BASE_URL,"/");
         $url = str_replace( $base,"", $url ); // <== Ok
 
-        // print "URL:\n";
-        // print_r($url);
-
         $url = rtrim($url,"/");
         $url = (empty($url)) ? "/" : $url;
 

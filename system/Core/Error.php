@@ -6,6 +6,7 @@ use Kancil\Core\Api;
 
 class Error 
 {
+    // Kalau ada error 404, langsung arahkan ke halaman view page404.html
     public function page404()
     {
         $parser = new Parser;

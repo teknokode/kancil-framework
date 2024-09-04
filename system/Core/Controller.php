@@ -2,12 +2,11 @@
 
 namespace Kancil\Core;
 
-//class BaseController
 class Controller
 {
     public function __construct() 
     {
-        //echo "BASECONTROLLER\n";
+        // echo "Ini adalah induk controller \n";
     }
 
 }

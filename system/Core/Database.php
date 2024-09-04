@@ -2,7 +2,6 @@
 namespace Kancil\Core;
 
 use Kancil\Drivers\Mysql;
-//use Medoo\Medoo;
 
 // MySQL
 if ( true) {
@@ -15,18 +14,17 @@ if ( false ) {
 
 class_alias( $driverClass, 'Kancil\Core\DatabaseDriver');
 
-//class Database extends Mysql
 class Database extends DatabaseDriver
 {
     protected $db;
 
+    // Awal langsung connect
     function __construct()
     {
         $this->connect();
     }
 
     // Fungsi-fungsi query berasal dari DatabaseDriver - inherit
-
     function skema()
     {
         return $this->db->select("skema", "*");

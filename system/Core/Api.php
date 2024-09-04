@@ -3,11 +3,13 @@ namespace Kancil\Core;
 
 class Api
 {
+    // Mendapatkan request method dari client
     public function requestMethod()
     {
         return strtolower($_SERVER['REQUEST_METHOD']);
     }
 
+    // Mengirimkan response JSON kepada client
     public function responseJSON($data = [], $status="Success", $message = "Ok", $code = 200)
     {
         $response = ["code" => $code, "status" => $status, "message" => $message, "data" => $data];
@@ -18,11 +20,13 @@ class Api
         die();
     }
 
+    // Mengirimkan response error kepada client
     public function responseError($message = "Terjadi kesalahan", $code = 400, $data = [])
     {
         $this->responseJSON($data, "Error", $message, $code);
     }
 
+    // Membaca header Authorization dari client
     public function requestAuth()
     {
         $reqHeaders = $this->requestHeaders();
@@ -30,11 +34,13 @@ class Api
         return trim(str_replace("Bearer", "", $reqBearer));
     }
 
+    // Membaca request JSON dari client (body)
     public function requestJSON()
     {
         return json_decode(file_get_contents("php://input", true), true);
     }
 
+    // Membaca request header dari client
     public function requestHeaders()
     {
         $headers = [];
