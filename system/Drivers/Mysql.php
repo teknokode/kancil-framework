@@ -7,7 +7,8 @@ use Kancil\Interfaces\Database;
 use \PDO;
 use \PDOException;
 
-class Mysql implements Database {
+//class Mysql implements Database {
+class Mysql {
     
     public function connect() 
     {

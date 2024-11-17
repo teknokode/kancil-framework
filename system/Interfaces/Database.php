@@ -21,6 +21,4 @@ interface Database
     // public function delete( $table, $where );
     // public function lastID();
     // public function rowCount();
-
-
 }
