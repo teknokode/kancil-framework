@@ -52,17 +52,35 @@ class Router
     // Menjalankan router
     public function match()
     {
+        // $method = strtolower($_SERVER['REQUEST_METHOD']);
+        // $url = $_SERVER['REQUEST_URI'];
+        // //$url = str_replace( basename(dirname(__FILE__))."/","", $url );
+        // //$url = "/".str_replace( $base,"", $url ); <== Ok
+
+        // // Definisi URL di .env tanpa pake backslash di belakang
+        // $base = rtrim(BASE_URL,"/");
+        // $url = str_replace( $base,"", $url ); // <== Ok
+
+        // $url = rtrim($url,"/");
+        // $url = (empty($url)) ? "/" : $url;
+
+        //=================
+        
         $method = strtolower($_SERVER['REQUEST_METHOD']);
-        $url = $_SERVER['REQUEST_URI'];
-        //$url = str_replace( basename(dirname(__FILE__))."/","", $url );
-        //$url = "/".str_replace( $base,"", $url ); <== Ok
 
-        // Definisi URL di .env tanpa pake backslash di belakang
-        $base = rtrim(BASE_URL,"/");
-        $url = str_replace( $base,"", $url ); // <== Ok
+        // ambil path saja tanpa query string
+        $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-        $url = rtrim($url,"/");
-        $url = (empty($url)) ? "/" : $url;
+        // hapus base jika ada
+        $base = rtrim(BASE_URL, "/");
+        if ($base !== '' && str_starts_with($url, $base)) {
+            $url = substr($url, strlen($base));
+        }
+
+        $url = rtrim($url, "/");
+        $url = ($url === '') ? '/' : $url;
+
+        //=================
 
         krsort($this->routes['get']);
 
