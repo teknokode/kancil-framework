@@ -1,19 +1,58 @@
 <?php
 
-if (!function_exists('cleanInput')) 
-{
-    function cleanInput(string $input): string {
-        // 1. Hapus <script>...</script> dan <style>...</style> beserta isinya
-        $clean = preg_replace('#<script.*?>.*?</script>#is', '', $input);
-        $clean = preg_replace('#<style.*?>.*?</style>#is', '', $clean);
+/**
+ * Bersihkan string: hapus <script> dan <style>, semua tag HTML, dan trim.
+ */
+function sanitize_string(string $input): string {
+    // hapus <script>...</script> dan <style>...</style>
+    $clean = preg_replace('#<script.*?>.*?</script>#is', '', $input);
+    $clean = preg_replace('#<style.*?>.*?</style>#is', '', $clean);
 
-        // 2. Hapus seluruh HTML tag
-        $clean = strip_tags($clean);
+    // hapus tag HTML lain
+    $clean = strip_tags($clean);
 
-        // 3. Escape untuk output ke HTML agar aman dari XSS
-        return htmlspecialchars($clean, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-    }
+    // trim spasi dan control character
+    $clean = trim($clean);
+
+    return $clean;
 }
+
+/**
+ * Rekursif sanitize array / value.
+ */
+function sanitize_recursive(mixed $value): mixed {
+    if (is_array($value)) {
+        foreach ($value as $k => $v) {
+            $value[$k] = sanitize_recursive($v);
+        }
+        return $value;
+    }
+    if (is_string($value)) {
+        return sanitize_string($value);
+    }
+    return $value; // int, bool, null tetap
+}
+
+/**
+ * Override superglobals (opsional).
+ * Panggil ini sekali di bootstrap supaya $_GET/$_POST sudah bersih.
+ */
+function sanitize_inputs(): void {
+    $_GET = sanitize_recursive($_GET);
+    $_POST = sanitize_recursive($_POST);
+    $_REQUEST = sanitize_recursive($_REQUEST); // kalau dipakai
+}
+
+// helper cepat untuk ngambil dengan default
+function input_get(string $key, mixed $default = null): mixed {
+    return $_GET[$key] ?? $default;
+}
+function input_post(string $key, mixed $default = null): mixed {
+    return $_POST[$key] ?? $default;
+}
+
+
+//-------------
 
 
 if (!function_exists('isBrowser')) 
