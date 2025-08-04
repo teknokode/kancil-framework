@@ -3,7 +3,7 @@
 /**
  * Bersihkan string: hapus <script> dan <style>, semua tag HTML, dan trim.
  */
-function sanitize_string(string $input): string {
+function sanitize_string($input) {
     // hapus <script>...</script> dan <style>...</style>
     $clean = preg_replace('#<script.*?>.*?</script>#is', '', $input);
     $clean = preg_replace('#<style.*?>.*?</style>#is', '', $clean);
@@ -20,7 +20,7 @@ function sanitize_string(string $input): string {
 /**
  * Rekursif sanitize array / value.
  */
-function sanitize_recursive(mixed $value): mixed {
+function sanitize_recursive($value) {
     if (is_array($value)) {
         foreach ($value as $k => $v) {
             $value[$k] = sanitize_recursive($v);
@@ -44,10 +44,10 @@ function sanitize_inputs(): void {
 }
 
 // helper cepat untuk ngambil dengan default
-function input_get(string $key, mixed $default = null): mixed {
+function input_get($key, $default = null) {
     return $_GET[$key] ?? $default;
 }
-function input_post(string $key, mixed $default = null): mixed {
+function input_post($key, $default = null) {
     return $_POST[$key] ?? $default;
 }
 
