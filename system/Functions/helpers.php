@@ -1,5 +1,21 @@
 <?php
 
+if (!function_exists('cleanInput')) 
+{
+    function cleanInput(string $input): string {
+        // 1. Hapus <script>...</script> dan <style>...</style> beserta isinya
+        $clean = preg_replace('#<script.*?>.*?</script>#is', '', $input);
+        $clean = preg_replace('#<style.*?>.*?</style>#is', '', $clean);
+
+        // 2. Hapus seluruh HTML tag
+        $clean = strip_tags($clean);
+
+        // 3. Escape untuk output ke HTML agar aman dari XSS
+        return htmlspecialchars($clean, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+    }
+}
+
+
 if (!function_exists('isBrowser')) 
 {
     function isBrowser()
