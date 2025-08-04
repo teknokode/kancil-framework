@@ -55,9 +55,9 @@ function input_post($key, $default = null) {
 //-------------
 
 
-if (!function_exists('isBrowser')) 
+if (!function_exists('is_browser')) 
 {
-    function isBrowser()
+    function is_browser()
     {
         $browserList[] = 'chrome';
         $browserList[] = 'chromium';

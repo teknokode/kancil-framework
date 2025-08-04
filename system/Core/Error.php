@@ -11,7 +11,8 @@ class Error
     {
         $parser = new Parser;
 
-        if (isBrowser()) 
+        //if (isBrowser()) 
+        if (is_browser()) 
         {
             return $parser->render("page404.html");
         } else 
