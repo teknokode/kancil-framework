@@ -3,6 +3,7 @@ namespace Kancil\Core;
 
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Kancil\Core\Database;
 
 class Auth 
 {
@@ -29,8 +30,12 @@ class Auth
     }
 
     // User login, bisa untuk web atau API
-    public function userLogin( $db, $username, $password )
+    //public function userLogin( $db, $username, $password )
+    public function userLogin( $username, $password )
     {
+
+        $db = new Database;
+
         $result = $db->find( USERS_TABLE , 
                              USERNAME_FIELD."='$username' AND ".PASSWORD_FIELD."= '$password'" );
 
@@ -42,7 +47,7 @@ class Auth
         //         ]
         //     ]);
 
-        print_r($result);
+        //print_r($result);
 
         if ($result)
         {

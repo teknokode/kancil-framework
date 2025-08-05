@@ -74,7 +74,7 @@ class Mysql {
 
     public function find( $table, $where ) 
     {
-        return $this->db->query("SELECT * FROM $table WHERE $where");
+        return $this->query("SELECT * FROM $table WHERE $where");
     }
 
     // public function where( $table, $column, $where ) 
