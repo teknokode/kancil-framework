@@ -16,7 +16,7 @@ class_alias( $driverClass, 'Kancil\Core\DatabaseDriver');
 
 class Database extends DatabaseDriver
 {
-    protected $db;
+    //protected $db;
 
     // Awal langsung connect
     function __construct()

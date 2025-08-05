@@ -34,7 +34,7 @@ class Auth
         // $result = $db->find( USERS_TABLE , 
         //                      USERNAME_FIELD."='$username' AND ".PASSWORD_FIELD."= '$password'" );
 
-        $result = $db->where( USERS_TABLE , "*", 
+        $result = $db->where( USERS_TABLE , '*', 
             [
                 "AND" => [
                     USERNAME_FIELD."[=]" => $username,
