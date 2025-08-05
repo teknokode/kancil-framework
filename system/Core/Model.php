@@ -15,6 +15,11 @@ class Model
     }
 
     // Dapatkan semua record pada tabel
+    public function query( $sql) {
+        return $this->db->query( $sql );
+    }
+
+    // Dapatkan semua record pada tabel
     public function get() {
         return $this->db->get($this->tableName);
     }
