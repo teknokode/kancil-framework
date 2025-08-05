@@ -16,7 +16,7 @@ class Mysql {
     public function connect()
     {
         $this->db = new Medoo([
-            'type' => 'mariadb',
+            'type' => 'mysql',
             'host' => DB_HOST,
             'database' => DB_NAME,
             'username' => DB_USER,
@@ -45,20 +45,20 @@ class Mysql {
     // }
 
 
-    public function query( $sql )
-    {
-        try {
+    // public function query( $sql )
+    // {
+    //     try {
           
-            $stmt = $this->db->prepare($sql);
-            $stmt->execute();
+    //         $stmt = $this->db->prepare($sql);
+    //         $stmt->execute();
 
-        } catch(PDOException $e) {
+    //     } catch(PDOException $e) {
           
-            pd("Error: " . $e->getMessage());
+    //         pd("Error: " . $e->getMessage());
 
-        }
-        return $stmt->fetchAll();
-    }
+    //     }
+    //     return $stmt->fetchAll();
+    // }
 
     // public function get( $table ) 
     // {
@@ -71,10 +71,10 @@ class Mysql {
     }
 
 
-    public function find( $table, $where ) 
-    {
-        return $this->query("SELECT * FROM $table WHERE $where");
-    }
+    // public function find( $table, $where ) 
+    // {
+    //     return $this->db->query("SELECT * FROM $table WHERE $where");
+    // }
 
     public function where( $table, $column, $where ) 
     {
