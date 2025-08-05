@@ -31,16 +31,16 @@ class Auth
     // User login, bisa untuk web atau API
     public function userLogin( $db, $username, $password )
     {
-        // $result = $db->find( USERS_TABLE , 
-        //                      USERNAME_FIELD."='$username' AND ".PASSWORD_FIELD."= '$password'" );
+        $result = $db->find( USERS_TABLE , 
+                             USERNAME_FIELD."='$username' AND ".PASSWORD_FIELD."= '$password'" );
 
-        $result = $db->where( USERS_TABLE , '*', 
-            [
-                "AND" => [
-                    USERNAME_FIELD."[=]" => $username,
-                    PASSWORD_FIELD."[=]" => $password
-                ]
-            ]);
+        // $result = $db->where( USERS_TABLE , '*', 
+        //     [
+        //         "AND" => [
+        //             USERNAME_FIELD."[=]" => $username,
+        //             PASSWORD_FIELD."[=]" => $password
+        //         ]
+        //     ]);
 
         print_r($result);
 
