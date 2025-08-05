@@ -17,10 +17,10 @@ class Mysql {
     {
         $this->db = new Medoo([
             'type' => 'mariadb',
-            'host' => 'localhost',
-            'database' => 'name',
-            'username' => 'your_username',
-            'password' => 'your_password',
+            'host' => DB_HOST,
+            'database' => DB_NAME,
+            'username' => DB_USER,
+            'password' => DB_PASS
         ]);
     }
     
