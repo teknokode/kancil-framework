@@ -25,9 +25,9 @@ class Database extends DatabaseDriver
     }
 
     // Fungsi-fungsi query berasal dari DatabaseDriver - inherit
-    function skema()
-    {
-        return $this->db->select("skema", "*");
-    }
+    // function skema()
+    // {
+    //     return $this->db->select("skema", "*");
+    // }
 
 }

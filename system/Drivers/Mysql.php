@@ -11,18 +11,18 @@ use \PDOException;
 //class Mysql implements Database {
 class Mysql {
 
-    protected $db;
+    protected $pdo;
 
     // public function connect()
     // {
-    //     $this->db = new Medoo([
+    //     $this->pdo = new Medoo([
     //         'type' => 'mysql',
     //         'host' => DB_HOST,
     //         'database' => DB_NAME,
     //         'username' => DB_USER,
     //         'password' => DB_PASS
     //     ]);
-    //     return $this->db;
+    //     return $this->pdo;
     // }
     
     public function connect() 
@@ -36,8 +36,8 @@ class Mysql {
         
         try 
         {
-            $this->db = new PDO( $dsn, DB_USER, DB_PASS, $options);
-            $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->pdo = new PDO( $dsn, DB_USER, DB_PASS, $options);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
         } catch(PDOException $e) {
 
@@ -50,7 +50,7 @@ class Mysql {
     {
         try {
           
-            $stmt = $this->db->prepare($sql);
+            $stmt = $this->pdo->prepare($sql);
             $stmt->execute();
 
         } catch(PDOException $e) {
@@ -68,7 +68,7 @@ class Mysql {
 
     // public function get( $table ) 
     // {
-    //     return $this->db->select($table,"*");
+    //     return $this->pdo->select($table,"*");
     // }
 
 
@@ -82,8 +82,46 @@ class Mysql {
     //     return $this->where($table, $column, $where );
     // }
 
-    public function update() {}
-    public function insert() {}
-    public function delete() {}
-    public function insertID() {}
+    // public function update() {}
+    // public function insert() {}
+    // public function delete() {}
+    // public function insertID() {}
+
+    public function insert($table, $data) {
+        $columns = implode(", ", array_keys($data));
+        $placeholders = ":" . implode(", :", array_keys($data));
+
+        $sql = "INSERT INTO $table ($columns) VALUES ($placeholders)";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($data);
+        
+        return $stmt->rowCount();
+    }
+
+    public function update($table, $data, $where) {
+        $set = "";
+        foreach ($data as $key => $value) {
+            $set .= "$key = :$key, ";
+        }
+        $set = rtrim($set, ", ");
+
+        $sql = "UPDATE $table SET $set WHERE $where";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($data);
+
+        return $stmt->rowCount();
+    }
+
+    public function delete($table, $where) {
+        $sql = "DELETE FROM $table WHERE $where";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+        
+        return $stmt->rowCount();
+    }
+
+    public function insertID() {
+        return $this->pdo->lastInsertId();
+    }
+
 }
