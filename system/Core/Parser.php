@@ -11,9 +11,10 @@ class Parser
     protected $handlebars;
 
     // Pengaturan awal Handlebars
-    public function __construct( )
+    public function __construct( $theme = 'default')
     {
-        $partialsDir = APP_PATH."/app/Views";
+        //$partialsDir = APP_PATH."/app/Views";
+        $partialsDir = APP_PATH."/app/Themes/".$theme;
 
         $partialsLoader = new FilesystemLoader($partialsDir,
             [
