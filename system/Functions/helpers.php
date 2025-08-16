@@ -1,5 +1,24 @@
 <?php
 
+
+function day_name($isodate) {
+    
+    // Buat object DateTime dengan zona waktu Asia/Jakarta (WIB)
+    $date = new DateTime($isodate, new DateTimeZone('Asia/Jakarta'));
+
+    // Array nama hari dalam Bahasa Indonesia
+    $day_names = [
+        "Minggu", "Senin", "Selasa", 
+        "Rabu", "Kamis", "Jumat", "Sabtu"
+    ];
+
+    // Ambil index hari (0 = Minggu, 6 = Sabtu)
+    $index = $date->format('w');
+
+    return $day_names[$index];
+}
+
+
 /**
  * Bersihkan string: hapus <script> dan <style>, semua tag HTML, dan trim.
  */
