@@ -1,4 +1,5 @@
 <?php
+
 namespace Kancil\Core;
 
 use Handlebars\Handlebars;
@@ -6,17 +7,18 @@ use Handlebars\Loader\FilesystemLoader;
 
 // Seharusnya ini sudah autoload pada class controller
 
-class Parser 
+class Parser
 {
     protected $handlebars;
 
     // Pengaturan awal Handlebars
-    public function __construct( $theme = 'default')
+    public function __construct($theme = 'default')
     {
         //$partialsDir = APP_PATH."/app/Views";
-        $partialsDir = APP_PATH."/app/Themes/".$theme;
+        $partialsDir = APP_PATH . "/app/Themes/" . $theme;
 
-        $partialsLoader = new FilesystemLoader($partialsDir,
+        $partialsLoader = new FilesystemLoader(
+            $partialsDir,
             [
                 "extension" => "html"
             ]
@@ -29,18 +31,16 @@ class Parser
     }
 
     // Render sebuah halaman dengan parameter data
-    public function render( $file, $param = [])
+    public function render($file, $param = [])
     {
         $data["base_url"] = BASE_URL;
         $data = array_merge($param, $data);
 
-        $cache_file = APP_PATH."/storage/Caches/".substr(base64_encode($file.json_encode($param)),0,100).".html";
+        $cache_file = APP_PATH . "/storage/Caches/" . substr(base64_encode($file . json_encode($param)), 0, 100) . ".html";
 
-        if ($this->isCacheExpired($cache_file, 0)) 
-        {
+        if ($this->isCacheExpired($cache_file, 0)) {
             $content = $this->handlebars->render($file, $data);
             return $this->savePrintCache($cache_file, $content);
-
         } else {
 
             return file_get_contents($cache_file);
@@ -51,13 +51,11 @@ class Parser
     private function isCacheExpired($cache_file, $minutes = 0)
     {
         // Kalau minutes = 0, cache dimatikan
-        if ($minutes==0) return true;
-        if (file_exists($cache_file)) 
-        {
+        if ($minutes == 0) return true;
+        if (file_exists($cache_file)) {
             $modified_time = filemtime($cache_file);
             $time_diff = time() - $modified_time;
-            if ($time_diff < ($minutes * 60)) 
-            {
+            if ($time_diff < ($minutes * 60)) {
                 return false;
             }
             unlink($cache_file);
@@ -66,11 +64,10 @@ class Parser
     }
 
     // Simpan dan tampilkan cache
-    private function savePrintCache( $cache_file, $content )
+    private function savePrintCache($cache_file, $content)
     {
         $content .= "<!-- mac.gyver.57 | 28.11.72 | " . date("Y.m.d H:i:s") . " -->";
-        file_put_contents( $cache_file, $content);
+        file_put_contents($cache_file, $content);
         return $content;
     }
-
 }

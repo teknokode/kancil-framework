@@ -1,18 +1,19 @@
 <?php
+
 namespace Kancil\Core;
 
 use Kancil\Drivers\Mysql;
 
 // MySQL
-if ( true) {
+if (true) {
     $driverClass = 'Kancil\Drivers\Mysql';
-} 
+}
 // Other
-if ( false ) {
+if (false) {
     $driverClass = 'Kancil\Drivers\Rethinkdb';
 }
 
-class_alias( $driverClass, 'Kancil\Core\DatabaseDriver');
+class_alias($driverClass, 'Kancil\Core\DatabaseDriver');
 
 class Database extends DatabaseDriver
 {
