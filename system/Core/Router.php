@@ -36,17 +36,40 @@ class Router
         $success = true;
         if (!empty($filter))
         {
-            list($class,$method) = explode("::", $filter);
+            list($class,$method) = $this->splitClass($filter);
+
             $object = new $class();
             $success = call_user_func_array(array($object, $method), $result["params"]);
         }
 
         if ($success)
         {
-            list($class,$method) = explode("::", $target);
+            //list($class,$method) = explode("::", $target);
+            list($class,$method) = $this->splitClass($target);
+
             $object = new $class();
             echo call_user_func_array(array($object, $method), $result["params"]);
         }
+    }
+
+    // Split nama class dan method-nya
+    protected function splitClass( $className )
+    {
+        // Default    
+        $class = $className;
+        $method = 'index';
+    
+        // Misal: App\Controllers\Root::index
+        if (str_contains($className, '::')) {
+            list($class,$method) = explode("::", $className);
+        } 
+
+        // Misal: App\Controllers\Root@index
+        if (str_contains($className, '@')) {
+            list($class,$method) = explode("@", $className);
+        } 
+
+        return [$class, $method];
     }
 
     // Menjalankan router
