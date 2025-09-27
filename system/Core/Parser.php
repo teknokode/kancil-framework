@@ -10,10 +10,17 @@ use Handlebars\Loader\FilesystemLoader;
 class Parser
 {
     protected $handlebars;
+    protected $currentTheme;
 
     // Pengaturan awal Handlebars
-    public function __construct($theme = 'default')
+    //public function __construct($theme = 'default')
+    public function __construct()
     {
+        // Apakah ada setting THEME di .env, bila tidak set default
+        $default = get_value( THEME, 'default'); 
+        // Apakah ada current theme dari code
+        $theme = get_value( $this->currentTheme, $default );
+
         //$partialsDir = APP_PATH."/app/Views";
         $partialsDir = APP_PATH . "/app/Themes/" . $theme;
 
@@ -28,6 +35,12 @@ class Parser
             "loader" => $partialsLoader,
             "partials_loader" => $partialsLoader
         ]);
+    }
+
+    // Set theme secara program
+    public function setTheme($theme)
+    {
+        $this->currentTheme =  $theme;
     }
 
     // Render sebuah halaman dengan parameter data
