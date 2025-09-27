@@ -1,5 +1,12 @@
 <?php
 
+if (!function_exists('get_value')) {
+
+    function get_value($value, $default = null) {
+        return empty($value) ? $default : $value;
+    }
+}
+
 if (!function_exists('day_name')) {
 
     function day_name($isodate)
@@ -32,8 +39,7 @@ if (!function_exists('day_name')) {
  */
 if (!function_exists('sanitize_string')) {
 
-    function sanitize_string($input)
-    {
+    function sanitize_string($input) {
         // hapus <script>...</script> dan <style>...</style>
         $clean = preg_replace('#<script.*?>.*?</script>#is', '', $input);
         $clean = preg_replace('#<style.*?>.*?</style>#is', '', $clean);
