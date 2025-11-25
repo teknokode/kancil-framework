@@ -32,7 +32,11 @@ class Api
     {
         $reqHeaders = $this->requestHeaders();
         $reqBearer = @$reqHeaders["Authorization"];
-        return trim(str_replace("Bearer", "", $reqBearer));
+        // return trim(str_replace("Bearer", "", $reqBearer));
+        if (!empty($reqBearer)) {
+            return preg_replace('/^Bearer\s+/i', '', $reqBearer);
+        }
+        return "";
     }
 
     // Membaca request JSON dari client (body)

@@ -25,9 +25,25 @@ class Auth
     // Mendapatkan header JWT
     public function getJwtHeaders($token)
     {
-        $headers = new stdClass();
+        $headers = new \stdClass();
         JWT::decode($token, new Key($this->key, 'HS256'), $headers);
         return $headers;
+    }
+
+    public function decodeJwtToken($token)
+    {
+        // Decode payload
+        $payload = JWT::decode($token, new Key($this->key, 'HS256'));
+
+        // Ambil header (manual, tapi aman)
+        [$headerB64, $payloadB64, $signatureB64] = explode('.', $token);
+
+        //$header = json_decode(base64_decode($headerB64));
+        if (isset($payload->iss)) {
+            unset($payload->iss);
+        }
+
+        return (object) $payload;
     }
 
     // User login, bisa untuk web atau API
