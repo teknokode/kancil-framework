@@ -13,7 +13,8 @@ class Api
     public function responseJSON($data = [], $status="Success", $message = "Ok", $code = 200)
     {
         $response = ["code" => $code, "status" => $status, "message" => $message, "data" => $data];
-        http_response_code($code);
+        //http_response_code($code);
+        http_response_code(200);
         header("Server: Kancil");
         header("Content-Type: application/json; charset=utf-8");
         echo json_encode($response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
