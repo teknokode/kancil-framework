@@ -39,6 +39,7 @@ class Auth
         [$headerB64, $payloadB64, $signatureB64] = explode('.', $token);
 
         //$header = json_decode(base64_decode($headerB64));
+        
         if (isset($payload->iss)) {
             unset($payload->iss);
         }
@@ -69,10 +70,16 @@ class Auth
 
         if ($result) {
             $_SESSION["users"] = json_encode($result[0]);
+            $_SESSION["user"] = json_encode($result[0]);
             $_SESSION["logged_in"] = true;
             return true;
         }
         return false;
+    }
+
+    public function getUserData()
+    {
+        return json_decode($_SESSION["user"]);
     }
 
     // Untuk mengubah secret key
