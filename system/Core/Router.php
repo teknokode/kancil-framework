@@ -34,14 +34,18 @@ class Router
         $filter = $result["filter"];
 
         $success = true;
+
+        // kalau ada filter, jalankan
         if (!empty($filter))
         {
             list($class,$method) = $this->splitClass($filter);
 
             $object = new $class();
-            $success = call_user_func_array(array($object, $method), $result["params"]);
+            //$success = call_user_func_array(array($object, $method), $result["params"]);
+            $success = call_user_func_array(array($object, $method), []);
         }
 
+        // kalau filter sukses, eksekusi
         if ($success)
         {
             //list($class,$method) = explode("::", $target);
@@ -115,6 +119,14 @@ class Router
         {
             foreach ($this->routes[$method] as $routeUrl => $target) 
             {
+                // route static harus jalan pertama, priotitas
+                if ($url === $routeUrl) { // exact match static route
+                    $returnTarget = $target["class"];
+                    $returnFilter = $target["filter"];
+                    $returnParams = [];
+                    break;
+                }
+
                 $pattern = preg_replace('/\/:([^\/]+)/', '/(?<$1>[^/]+)', $routeUrl); //<=== FIX GOOD
 
                 // print "\nPattern:\n";
