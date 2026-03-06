@@ -35,6 +35,25 @@ class Parser
             "loader" => $partialsLoader,
             "partials_loader" => $partialsLoader
         ]);
+        
+        // Register custom helpers
+        $this->handlebars->addHelper('if_eq', function($template, $context, $v1, $v2) {
+            if ($v1 == $v2) {
+                return $template->render($context);
+            }
+            return '';
+        });
+        
+        $this->handlebars->addHelper('unless_eq', function($template, $context, $v1, $v2) {
+            if ($v1 != $v2) {
+                return $template->render($context);
+            }
+            return '';
+        });
+        
+        $this->handlebars->addHelper('number_format', function($template, $context, $value) {
+            return number_format($value ?? 0);
+        });
     }
 
     // Set theme secara program
